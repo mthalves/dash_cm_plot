@@ -29,7 +29,20 @@ texts = {
 }
 
 def Select_File():
-    return html.Div([
-        SectionHTML(texts['section']),
-        UploadHTML(),
-    ])
+    return html.Div(
+    			[html.Div(
+    				[SectionHTML(texts['section'])],
+        			style={ 'width': '100%', 
+        					'height': '100%',
+            				'backgroundColor': colors['background'],
+            				}
+            		),
+    			html.Div(
+    				[UploadHTML()],
+        			style={ 'width': '50%', 
+        					'height': '100%',
+            				'backgroundColor': colors['background'],
+            				'marginLeft': '25%', 'marginRight': '25%'
+            				}
+            		)]
+    			)

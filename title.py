@@ -34,13 +34,22 @@ texts = {
 }
 
 def Title_and_Introduction():
-    return html.Div(
-        style={ 'width': '100%', 'height': '100%',
-            'backgroundColor': colors['background'],},
-        children = [
-        TitleHTML(texts['title']),
-        SubTitleHTML(texts['introduction'][0]),
-        SubTitleHTML(texts['introduction'][1]),
-        SubTitleHTML(texts['introduction'][2]),
-        SubTitleHTML(texts['introduction'][3]),
+    return html.Div([
+        html.Div(
+            TitleLeftHTML(texts['title']),
+            style={ 'width': '100%', 'height': '100%',
+            'backgroundColor': colors['background'],
+            'backgroundImage': 'url(https://purduenext.purdue.edu/sites/prdnext/files/ce.poly_.m1_header._v2.jpg)'},
+        ),
+        html.Div([
+            SubTitleBoldHTML(texts['introduction'][0]),
+            SubTitleBoldHTML(texts['introduction'][1]),
+            SubTitleBoldHTML(texts['introduction'][2]),
+            SubTitleBoldHTML(texts['introduction'][3]),
+        ],style={ 'width': '90%', 'height': '95%',
+            'marginLeft': '10%',
+            'marginTop': '2.5%',
+            'marginBot': '2.5%',
+            'backgroundColor': colors['background'],}
+            )
     ])

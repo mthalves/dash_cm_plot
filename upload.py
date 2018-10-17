@@ -70,7 +70,7 @@ def UploadHTML():
             children= UploadTextHTML(),
             style={
                 'width': '100%',
-                'height': '60px',
+                'height': '100%',
                 'lineHeight': '60px',
                 'borderWidth': '1px',
                 'borderStyle': 'dashed',
