@@ -22,6 +22,10 @@ def InputTextHTML(id_,placeholder_):
             placeholder= placeholder_,
             spellcheck = True,
             style={
+                'width': '80%',
+                'marginLeft': '10%', 'marginRight': '10%',
+                'height': '90%',
+                'marginBottom': '10%',
                 'textAlign': 'left',
                 'color': colors['text'],
                 'fontFamily': 'Roboto Condensed',

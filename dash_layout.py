@@ -32,16 +32,30 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 
 app.layout = html.Div(
-    style={ 'width': '100%', 'height': '100%',
-            'backgroundColor': colors['background'],}, 
+    style={'width': '100%', 'height': '100%',
+        'backgroundColor': colors['background'],
+        'backgroundImage': 'url(https://i.redd.it/ev89ehtc0o2x.png)'
+    }, 
     children=[
         Title_and_Introduction(),
-        Select_File(),
-        Select_Analysis(),
-        Select_Plot_Information(),
-        ButtonHTML('PLOT','plot_button'),
+        html.Div(
+            children = [
+                Select_File(),
+                Select_Analysis(),
+                Select_Plot_Information(),
+                ButtonHTML('PLOT','plot_button'),
+            ], style={ 'width': '60%', 'height': '95%',
+                    'marginLeft': '20%',
+                    'marginRight': '20%',
+                    'marginTop': '5%',
+                    'borderWidth': '1px',
+                    'borderStyle': 'outset',
+                    'borderRadius': '5px',
+                    'backgroundColor': colors['background'],
+                }, 
+        ),
         Acknowledgment_and_Creators(),
-    ],
+    ]
 )
 
 @app.callback(Output('output-data-upload', 'children'),

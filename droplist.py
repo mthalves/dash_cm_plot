@@ -18,12 +18,14 @@ def DroplistHTML(id_,options,value):
             dcc.Dropdown(
                 id= id_,
                 style = {
-                    'width': '100%',
+                    'width': '80%',
                     'textAlign': 'left',
                     'color': colors['text'],
                     'fontFamily': 'Roboto Condensed',
                     'fontSize': '18',
                     'fontWeight': 'normal',
+                    'marginLeft': '10%',
+                    'marginRight': '10%',
                 },
                 options= options,
                 value= value,
