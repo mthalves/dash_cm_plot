@@ -67,12 +67,13 @@ def SubTitleHTML(children):
             children= children, 
             style={
                 'width': '90%', 'height': '100%',
-                'textAlign': 'left',
+                'textAlign': 'center',
                 'color': colors['text'],
                 'fontFamily': 'Roboto Condensed',
                 'fontSize': '18',
                 'fontWeight': 'normal',
-                'marginLeft': '10%'
+                'marginLeft': '5%',
+                'marginRight': '5%',
             }
         )
 

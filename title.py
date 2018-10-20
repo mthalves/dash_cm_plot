@@ -45,8 +45,8 @@ def Title_and_Introduction():
             html.Div(
                 children=[
                     SubTitleBoldHTML(texts['introduction'][0]),
-                    SubTitleBoldHTML(texts['introduction'][1]),
-                    SubTitleBoldHTML(texts['introduction'][2]),
+                    SubTitleHTML(texts['introduction'][1]),
+                    SubTitleHTML(texts['introduction'][2]),
                     SubTitleBoldHTML(texts['introduction'][3]),
                 ], style={ 'width': '60%', 'height': '95%',
                     'marginLeft': '20%',
