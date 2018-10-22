@@ -38,6 +38,7 @@ app.layout = html.Div(
     }, 
     children=[
         Title_and_Introduction(),
+
         html.Div(
             children = [
                 Select_File(),
@@ -54,6 +55,7 @@ app.layout = html.Div(
                     'backgroundColor': colors['background'],
                 }, 
         ),
+        
         Acknowledgment_and_Creators(),
     ]
 )

@@ -26,8 +26,8 @@ from button import *
 from image import *
 
 texts = {
-    'title': 'C&M',
-    'introduction': ['Welcome to the C & M platform.',
+    'title': 'Anattery',
+    'introduction': ['Welcome to the Anattery platform.',
                     'This platform was created in order to facilitate and stimulate the production of interactive graphics of battery-related data. ',
                     'As an open source platform, all collaboration and tips are more than welcome. ',
                     '\"Obrigado e de nada\"! '],
@@ -40,7 +40,7 @@ def Title_and_Introduction():
                 children=[TitleLeftHTML(texts['title'])],
                 style={ 'width': '100%', 'height': '100%',
                 'backgroundColor': colors['background'],
-                'backgroundImage': 'url(https://purduenext.purdue.edu/sites/prdnext/files/ce.poly_.m1_header._v2.jpg)'},
+                'backgroundImage': 'url(https://www.everynation.org/wp-content/uploads/2018/02/Monthly-Website-Header-background.jpg)'},
             ),
             html.Div(
                 children=[

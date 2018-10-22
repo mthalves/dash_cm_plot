@@ -48,6 +48,20 @@ def Title2HTML(children):
             }
         )
 
+def Title2WhiteHTML(children):
+    return html.H1(
+            children=children,
+            style={
+                'textAlign': 'center',
+                'color': '#FFFFFF',
+                'fontFamily': 'Roboto Condensed',
+                'fontSize': '32',
+                'fontWeight': 'bold',
+                'marginTop': '35px',
+                'marginBot': '35px'
+            }
+        )
+
 def TitleLeftHTML(children):
     return html.H1(
             children=children,
@@ -84,6 +98,21 @@ def SubTitleBoldHTML(children):
                 'width': '90%', 'height': '100%',
                 'textAlign': 'center',
                 'color': colors['text'],
+                'fontFamily': 'Roboto Condensed',
+                'fontSize': '18',
+                'fontWeight': 'bold',
+                'marginLeft': '5%',
+                'marginRight': '5%',
+            },
+        )
+
+def SubTitleWhiteBoldHTML(children):
+    return html.P(
+            children= children, 
+            style={
+                'width': '90%', 'height': '100%',
+                'textAlign': 'center',
+                'color': '#FFFFFF',
                 'fontFamily': 'Roboto Condensed',
                 'fontSize': '18',
                 'fontWeight': 'bold',
