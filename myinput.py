@@ -6,7 +6,6 @@ import io
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
-import dash_table_experiments as dt
 from dash.dependencies import Input, Output, State
 
 import pandas as pd
@@ -20,7 +19,7 @@ def InputTextHTML(id_,placeholder_):
             minlength = 1,
             maxlength = 30,
             placeholder= placeholder_,
-            spellcheck = True,
+            spellCheck = True,
             style={
                 'width': '80%',
                 'marginLeft': '10%', 'marginRight': '10%',

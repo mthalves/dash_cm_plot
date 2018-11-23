@@ -6,7 +6,6 @@ import io
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
-import dash_table_experiments as dt
 from dash.dependencies import Input, Output, State
 
 import pandas as pd
@@ -32,7 +31,7 @@ texts = {
     'creators': 'CREATORS',
     'alana': ['Technical expertise in Interfacial electrochemistry, Electrocatalysis, Development and Characterization of materials for energy conversion/storage. Project Design and Management.'],
     'caio': ['<TO DO>'],
-    'micanga': ['Computer Science researcher currently working with Cooperative Game Theory. Diverse background and interest in the hottest areas (e.g., Data Forecasting and Problem Design).'],
+    'micanga': ['Computer Science researcher currently working with Cooperative Game Theory. Diverse background and interest in the hottest areas (e.g., Data Forecasting and General Problem Design).'],
 }
 
 def Acknowledgment_and_Creators():

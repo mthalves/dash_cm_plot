@@ -6,7 +6,6 @@ import io
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
-import dash_table_experiments as dt
 from dash.dependencies import Input, Output, State
 
 import pandas as pd
@@ -26,8 +25,8 @@ from button import *
 from image import *
 
 texts = {
-    'title': 'Anattery',
-    'introduction': ['Welcome to the Anattery platform.',
+    'title': 'Gluettery',
+    'introduction': ['Welcome to the Gluettery platform.',
                     'This platform was created in order to facilitate and stimulate the production of interactive graphics of battery-related data. ',
                     'As an open source platform, all collaboration and tips are more than welcome. ',
                     '\"Obrigado e de nada\"! '],

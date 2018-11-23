@@ -6,7 +6,6 @@ import dash
 from dash.dependencies import Input, Output, State
 import dash_core_components as dcc
 import dash_html_components as html
-import dash_table_experiments as dt
 
 import pandas as pd
 
@@ -63,10 +62,10 @@ def UploadTextHTML():
                 html.A('Select Files')
             ])
 
-def UploadHTML():
+def UploadHTML(id_):
     return html.Div([
         dcc.Upload(
-            id='upload-data',
+            id=id_,
             children= UploadTextHTML(),
             style={
                 'width': '100%',

@@ -6,7 +6,6 @@ import io
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
-import dash_table_experiments as dt
 from dash.dependencies import Input, Output, State
 
 import pandas as pd
@@ -38,7 +37,7 @@ def Select_File():
             				}
             		),
     			html.Div(
-    				[UploadHTML()],
+    				[UploadHTML('upload-data')],
         			style={ 'width': '50%', 
         					'height': '100%',
             				'backgroundColor': colors['background'],
