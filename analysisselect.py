@@ -34,7 +34,12 @@ def Select_Analysis():
         DroplistHTML('analysis-dropdown',
         			[{'label': 'Differential Voltage Analysis (DVA)', 'value': 'DVA'},
                     {'label': 'Coulombic Efficiency (CE)', 'value': 'CE'}],
-                    'DVA'),
-        SubsectionHTML(texts['subsecb']),
-        RadioItemsHTML(),
+                    'DVA')
     ])
+
+def Select_Analysis_Ratio(ratio_flag):
+    if ratio_flag == True:
+        return html.Div([
+            SubsectionHTML(texts['subsecb']),
+            RadioItemsHTML()
+            ])

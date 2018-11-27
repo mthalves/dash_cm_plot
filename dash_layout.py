@@ -32,6 +32,8 @@ external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 file = []
+last_n_clicks = 0
+ratio_flag = False
 
 app.layout = html.Div(
     style={'width': '100%', 'height': '100%',
@@ -39,12 +41,15 @@ app.layout = html.Div(
         'backgroundImage': 'url(https://i.redd.it/ev89ehtc0o2x.png)'
     }, 
     children=[
+        # Header Layout
         Title_and_Introduction(),
 
+        # Body Layout
         html.Div(
             children = [
                 Select_File(),
                 Select_Analysis(),
+                Select_Analysis_Ratio(ratio_flag),
                 Select_Plot_Information(),
                 ButtonHTML('PLOT','plot_button'),
                 html.Div(id='plot_click'),
@@ -59,6 +64,7 @@ app.layout = html.Div(
                 }, 
         ),
         
+        # Footpage Layout
         Acknowledgment_and_Creators(),
     ]
 )
@@ -102,16 +108,24 @@ def file_callback(list_of_contents, list_of_names, list_of_dates):
 
         return children 
 
-@app.callback(   Output(component_id='plot_click', component_property='children'),
-                [],
-                [],
-                [Event('plot_button','click')],
-                  )
-def plot_callback():
+def plot_callback(dropdown):
     global file
-    print('plotting')
-    #return Novonix_Protocol.CoulombicEfficiency(file)
-    return Novonix_Protocol.DVA(file,[5,10])
+    if dropdown == 'CE':
+        return Novonix_Protocol.CoulombicEfficiency(file)
+    elif dropdown == 'DVA':
+        return Novonix_Protocol.DVA(file,[5,10])
+
+@app.callback(   
+    Output(component_id='plot_click', component_property='children'),
+    [Input('plot_button','n_clicks'),
+     Input('analysis-dropdown','value')])
+def refresh_callback(n_clicks,value):
+    global last_n_clicks
+    if n_clicks == 0:
+        return None
+    elif last_n_clicks != n_clicks:
+        last_n_clicks = n_clicks
+        return plot_callback(value)
 
 if __name__ == '__main__':
     app.run_server(debug=True)
