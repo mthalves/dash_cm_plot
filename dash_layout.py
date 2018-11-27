@@ -3,6 +3,7 @@ import base64
 import datetime
 import io
 import re
+from copy import deepcopy
 
 import dash
 import dash_core_components as dcc
@@ -49,6 +50,7 @@ app.layout = html.Div(
             children = [
                 Select_File(),
                 Select_Analysis(),
+                Select_Analysis_Cycle(),
                 Select_Analysis_Radio(True,'A'),
                 Select_Plot_Information(),
                 ButtonHTML('PLOT','plot_button'),
@@ -119,10 +121,23 @@ def dropdown_callback(value,radio):
     elif value == 'DVA':
         return Select_Analysis_Radio(False,'A')
 
+def regex_format(text):
+    formated = list()
+    for c in text:
+        if c == ' ' and len(formated) > 0 and formated[-1].isdigit():
+            formated.append(c)
+        elif c == '-' and len(formated) > 0 and formated[-1].isdigit():
+            formated.append(c)
+        elif c == ',' and len(formated) > 0 and formated[-1].isdigit():
+            formated.append(c)
+        elif re.match('\d',c) != None:
+            formated.append(c)
+    return formated
+
 @app.callback(Output(component_id='cycles-select',component_property='children'),
                 [Input(component_id='cycles-input',component_property='value')],
                 [],
-                [Event('cycles-input','change')])
+                [])
 def cycles_callback(input_):
     if re.match("^\s*$",input_) != None:
         return 'Selected Cycles = Empty'

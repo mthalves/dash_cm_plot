@@ -36,10 +36,17 @@ def Select_Analysis():
         			[{'label': 'Differential Voltage Analysis (DVA)', 'value': 'DVA'},
                     {'label': 'Coulombic Efficiency (CE)', 'value': 'CE'}],
                     'DVA'),
-        SubsectionHTML(texts['subsecb']),
-        InputTextHTML('cycles-input','Select Cycles to evaluate... single: "1", multi: "1, 3, 5", range: "1-5"'),
-        SystemAnswerHTML('Selected Cycles = Empty','cycles-select')
     ])
+
+def Select_Analysis_Cycle():
+    return html.Div(
+        id = 'analysis-cycle',
+        children = [
+            SubsectionHTML(texts['subsecb']),
+            InputTextHTML('cycles-input','Select Cycles to evaluate... single: "1", multi: "1, 3, 5", range: "1-5"'),
+            SystemAnswerHTML('Selected Cycles = Empty','cycles-select'),
+            SystemAnswerHTML('* Unnecessary for: Coulombic Efficiency plot.','cycles-select-un')
+        ])
 
 def Select_Analysis_Radio(radio_flag,radio):
     if radio_flag:
