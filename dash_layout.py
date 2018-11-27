@@ -2,6 +2,7 @@
 import base64
 import datetime
 import io
+import re
 
 import dash
 import dash_core_components as dcc
@@ -117,6 +118,19 @@ def dropdown_callback(value,radio):
         return Select_Analysis_Radio(False,'A')
     elif value == 'DVA':
         return Select_Analysis_Radio(False,'A')
+
+@app.callback(Output(component_id='cycles-select',component_property='children'),
+                [Input(component_id='cycles-input',component_property='value')],
+                [],
+                [Event('cycles-input','change')])
+def cycles_callback(input_):
+    if re.match("^\s*$",input_) != None:
+        return 'Selected Cycles = Empty'
+    if re.match("^([\d]+\s*[\s\,\-]{0,1}\s*)+$",input_) != None:
+        return 'Selected Cycles = ',input_
+    else:
+        return 'Selected Cycles = Invalid Format'
+
 
 def plot_callback(dropdown,title,xlabel,ylabel):
     global file
