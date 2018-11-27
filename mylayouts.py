@@ -187,6 +187,20 @@ def ParagraphHTML(children):
             }
         )
 
+def SystemAnswerHTML(children,id_):
+    return html.H1(
+            id = id_,
+            children=children,
+            style={
+                'width': '95%', 'height': '100%',
+                'textAlign': 'left',
+                'color': '#000000',
+                'fontFamily': 'Roboto Condensed',
+                'fontSize': '16',
+                'marginLeft': '5%',
+            }
+        )
+
 def ThreeColumnsHTML(children):
     return html.Div([
             html.Div(children=children[0],

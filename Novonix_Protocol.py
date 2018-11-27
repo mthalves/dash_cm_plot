@@ -40,9 +40,15 @@ CIRCUIT_TEMP = 9
 COULUMBIC 	 = 10
 DVA 		 = 11
 
-def CoulombicEfficiency(file):
-	plotx = 'Cycle Number'
-	ploty = 'Coulombic Efficiency (%)'
+def CoulombicEfficiency(file,title,xlabel,ylabel):
+	if xlabel != '':
+		plotx = xlabel
+	else:
+		plotx = 'Cycle Number'
+	if ylabel != '':
+		ploty = ylabel
+	else:
+		ploty = 'Coulombic Efficiency (%)'
 	
 	x = []
 	charge, discharge = [], []
@@ -93,6 +99,7 @@ def CoulombicEfficiency(file):
 	                }
 	            ],
 	            'layout':{
+	        		'title':title,
             		'xaxis': {
             			'title':plotx,
             			'size':18,
@@ -130,8 +137,17 @@ def differentiate(V, Q):
 
 	return dVdQ_gaus
 
-def DVA(file,cycles):
+def DVA(file,cycles,title,xlabel,ylabel):
 	cycle_test = 1
+
+	if xlabel != '':
+		plotx = xlabel
+	else:
+		plotx = 'Capacity (Ah)'
+	if ylabel != '':
+		ploty = ylabel
+	else:
+		ploty = 'dV/dQ'
 	
 	Q = []
 	V = []
@@ -154,12 +170,10 @@ def DVA(file,cycles):
 		cycle = cycle + 1
 		print(cycle)
 		if(len(Q) > 3 and len(V) > 3 and any([t != Q[0] for t in Q]) ):
-			plotx = []
 			window_size= max([3, round(len(V)/50) if round(len(V)/50) % 2 != 0 else round(len(V)/50)+1])
 			dVdQ = differentiate(V, Q)
 
-			print(cycle)
-			if(int(cycle) in cycles):
+			if((int(cycle)-2) in cycles):
 				print('finish')
 				return html.Div([
 				    dcc.Graph(
@@ -170,34 +184,25 @@ def DVA(file,cycles):
 				                	'x': Q[1:len(Q)],
 				                    'y': dVdQ,
 				                    'mode': 'lines+markers',
-				                    'marker': {'size': 12}
+				                    'marker': {'size': 12},
 				                }
 				            ],
 				            'layout':{
+				        		'title':title,
 			            		'xaxis': {
-			            			'title':'Capacity (Ah)',
+			            			'title':plotx,
 			            			'size':18,
-			            			'family':'Roboto Condensed Bold'
+			            			'family':'Roboto Condensed Bold',
 			            		},
 			            		'yaxis': {
-			            			'title':'dV/dQ',
+			            			'title':ploty,
 			            			'size':18,
-			            			'family':'Roboto Condensed Bold'
+			            			'family':'Roboto Condensed Bold',
 			            		}
 			            	}
 				        }
 				    )
 			    ])
-				matplotlib.pyplot.figure(cur_file)
-				matplotlib.pyplot.title(plottitle)
-				matplotlib.pyplot.xlabel(plotx_title)
-				matplotlib.pyplot.ylabel(ploty_title)
-				matplotlib.pyplot.plot(Q[1:len(Q)], dVdQ,'-o',label = 'Cycle ' + str(cycle-1))
-				matplotlib.pyplot.legend(loc = 'upper right')
-					
-				cur_file = cur_file + 1
-
-
-			V, Q, plotx, dVdQ = [], [], [], []
+			V, Q, dVdQ = [], [], []
 
 	print('finish')

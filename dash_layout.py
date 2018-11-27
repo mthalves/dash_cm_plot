@@ -33,7 +33,6 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 file = []
 last_n_clicks = 0
-ratio_flag = False
 
 app.layout = html.Div(
     style={'width': '100%', 'height': '100%',
@@ -49,14 +48,15 @@ app.layout = html.Div(
             children = [
                 Select_File(),
                 Select_Analysis(),
-                Select_Analysis_Ratio(ratio_flag),
+                Select_Analysis_Radio(True,'A'),
                 Select_Plot_Information(),
                 ButtonHTML('PLOT','plot_button'),
                 html.Div(id='plot_click'),
-            ], style={ 'width': '60%', 'height': '95%',
+            ], style={ 'width': '60%', 'height': '90%',
                     'marginLeft': '20%',
                     'marginRight': '20%',
                     'marginTop': '5%',
+                    'marginBotton': '5%',
                     'borderWidth': '1px',
                     'borderStyle': 'outset',
                     'borderRadius': '5px',
@@ -108,24 +108,37 @@ def file_callback(list_of_contents, list_of_names, list_of_dates):
 
         return children 
 
-def plot_callback(dropdown):
+@app.callback(Output(component_id='analysis-radio',component_property='children'),
+                [Input(component_id='analysis-dropdown',component_property='value')],
+                [State('type-radioitems','value')],
+                [Event('type-radioitems','change')])
+def dropdown_callback(value,radio):
+    if value == 'CE':
+        return Select_Analysis_Radio(False,'A')
+    elif value == 'DVA':
+        return Select_Analysis_Radio(False,'A')
+
+def plot_callback(dropdown,title,xlabel,ylabel):
     global file
     if dropdown == 'CE':
-        return Novonix_Protocol.CoulombicEfficiency(file)
+        return Novonix_Protocol.CoulombicEfficiency(file,title,xlabel,ylabel)
     elif dropdown == 'DVA':
-        return Novonix_Protocol.DVA(file,[5,10])
+        return Novonix_Protocol.DVA(file,[5,10],title,xlabel,ylabel)
 
 @app.callback(   
     Output(component_id='plot_click', component_property='children'),
     [Input('plot_button','n_clicks'),
-     Input('analysis-dropdown','value')])
-def refresh_callback(n_clicks,value):
+     Input('analysis-dropdown','value'),
+     Input('title-input','value'),
+     Input('xlabel-input','value'),
+     Input('ylabel-input','value')])
+def refresh_callback(n_clicks,value,title,xlabel,ylabel):
     global last_n_clicks
     if n_clicks == 0:
         return None
     elif last_n_clicks != n_clicks:
         last_n_clicks = n_clicks
-        return plot_callback(value)
+        return plot_callback(value,title,xlabel,ylabel)
 
 if __name__ == '__main__':
     app.run_server(debug=True)

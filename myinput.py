@@ -23,8 +23,8 @@ def InputTextHTML(id_,placeholder_):
             style={
                 'width': '80%',
                 'marginLeft': '10%', 'marginRight': '10%',
-                'height': '90%',
-                'marginBottom': '10%',
+                'height': '97.5%',
+                'marginBottom': '2.5%',
                 'textAlign': 'left',
                 'color': colors['text'],
                 'fontFamily': 'Roboto Condensed',
