@@ -14,30 +14,22 @@ from dash.dependencies import Input, Output, State, Event
 import pandas as pd
 
 # Dash Python - My HTML Interface
-from title import *
-from fileselect import *
-from analysisselect import *
-from plotinfoselect import *
-from ackandcreators import *
-from mylayouts import *
-from myinput import *
-from radioitems import *
-from upload import *
-from droplist import *
-from button import *
-from image import *
+from header import *
+from body import *
+from footpage import *
 
 # Protocols, Plots and Utils
 import Novonix_Protocol
-from utils import *
 
+# Dash External Style Import
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
+# Global variables
 file = []
 last_n_clicks = 0
 
+# Main Layout
 app.layout = html.Div(
     style={'width': '100%', 'height': '100%',
         'backgroundColor': colors['background'],
@@ -45,35 +37,18 @@ app.layout = html.Div(
     }, 
     children=[
         # Header Layout
-        Title_and_Introduction(),
+        Header(),
 
         # Body Layout
-        html.Div(
-            children = [
-                Select_File(),
-                Select_Analysis(),
-                Select_Analysis_Cycle(),
-                Select_Analysis_Radio(True,'A'),
-                Select_Plot_Information(),
-                ButtonHTML('PLOT','plot_button'),
-                html.Div(id='plot_click'),
-            ], style={ 'width': '60%', 'height': '90%',
-                    'marginLeft': '20%',
-                    'marginRight': '20%',
-                    'marginTop': '5%',
-                    'marginBotton': '5%',
-                    'borderWidth': '1px',
-                    'borderStyle': 'outset',
-                    'borderRadius': '5px',
-                    'backgroundColor': colors['background'],
-                }, 
-        ),
+        BodyIntro(),
+        Body(),
         
         # Footpage Layout
-        Acknowledgment_and_Creators(),
+        FootPage(),
     ]
 )
 
+# Callbacks
 def get_csv(contents, filename, date):
     content_type, content_string = contents.split(',')
     decoded = base64.b64decode(content_string)

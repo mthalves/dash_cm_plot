@@ -9,7 +9,10 @@ import dash_html_components as html
 
 import pandas as pd
 
-from utils import *
+colors = {
+    'background': '#FFFFFF',
+    'text': '#000000'
+}
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 

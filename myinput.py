@@ -10,8 +10,6 @@ from dash.dependencies import Input, Output, State
 
 import pandas as pd
 
-from utils import *
-
 def InputTextHTML(id_,placeholder_):
     return dcc.Input(
                 id= id_,
@@ -26,7 +24,7 @@ def InputTextHTML(id_,placeholder_):
                     'height': '97.5%',
                     'marginBottom': '2.5%',
                     'textAlign': 'left',
-                    'color': colors['text'],
+                    'color': '#000000',
                     'fontFamily': 'Roboto Condensed',
                     'fontSize': '18',
                     'fontWeight': 'normal',

@@ -7,10 +7,7 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output, State
-
 import pandas as pd
-
-from utils import *
 
 from myinput import *
 from radioitems import *
@@ -19,169 +16,126 @@ from droplist import *
 from button import *
 from image import *
 
-def TitleHTML(children):
+def TitleHTML(children,color='#000000',fontSize='64'):
 	return html.H1(
             children=children,
             style={
                 'textAlign': 'center',
-                'color': colors['text'],
+                'color': color,
                 'fontFamily': 'Roboto Condensed',
-                'fontSize': '64',
+                'fontSize': fontSize,
                 'fontWeight': 'bold',
                 'marginTop': '35px',
                 'marginBot': '35px'
             }
 		)
 
-def Title2HTML(children):
-    return html.H1(
-            children=children,
-            style={
-                'textAlign': 'center',
-                'color': colors['text'],
-                'fontFamily': 'Roboto Condensed',
-                'fontSize': '32',
-                'fontWeight': 'bold',
-                'marginTop': '35px',
-                'marginBot': '35px'
-            }
-        )
-
-def Title2WhiteHTML(children):
-    return html.H1(
-            children=children,
-            style={
-                'textAlign': 'center',
-                'color': '#FFFFFF',
-                'fontFamily': 'Roboto Condensed',
-                'fontSize': '32',
-                'fontWeight': 'bold',
-                'marginTop': '35px',
-                'marginBot': '35px'
-            }
-        )
-
-def TitleLeftHTML(children):
+def TitleLeftHTML(children,color='#000000',fontSize='64'):
     return html.H1(
             children=children,
             style={
                 'width': '80%', 'height': '100%',
                 'textAlign': 'left',
-                'color': '#FFFFFF',
+                'color': color,
                 'fontFamily': 'Roboto Condensed',
-                'fontSize': '100',
+                'fontSize': fontSize,
                 'fontWeight': 'bold',
                 'marginLeft': '20%',
             }
         )
 
-def SubTitleHTML(children):
+def SubTitleHTML(children,color='#000000',fontSize='18'):
 	return html.P(
             children= children, 
             style={
                 'width': '90%', 'height': '100%',
                 'textAlign': 'center',
-                'color': colors['text'],
+                'color': color,
                 'fontFamily': 'Roboto Condensed',
-                'fontSize': '18',
+                'fontSize': fontSize,
                 'fontWeight': 'normal',
                 'marginLeft': '5%',
                 'marginRight': '5%',
             }
         )
 
-def SubTitleBoldHTML(children):
+def SubTitleBoldHTML(children,color='#000000',fontSize='18'):
     return html.P(
             children= children, 
             style={
                 'width': '90%', 'height': '100%',
                 'textAlign': 'center',
-                'color': colors['text'],
+                'color': color,
                 'fontFamily': 'Roboto Condensed',
-                'fontSize': '18',
+                'fontSize': fontSize,
                 'fontWeight': 'bold',
                 'marginLeft': '5%',
                 'marginRight': '5%',
             },
         )
 
-def SubTitleWhiteBoldHTML(children):
-    return html.P(
-            children= children, 
-            style={
-                'width': '90%', 'height': '100%',
-                'textAlign': 'center',
-                'color': '#FFFFFF',
-                'fontFamily': 'Roboto Condensed',
-                'fontSize': '18',
-                'fontWeight': 'bold',
-                'marginLeft': '5%',
-                'marginRight': '5%',
-            },
-        )
-
-def SectionHTML(children):
+def SectionHTML(children,color='#000000',fontSize='24'):
 	return html.H1(
             children= children,
             style={
                 'textAlign': 'left',
-                'color': colors['text'],
+                'color': color,
                 'fontFamily': 'Roboto Condensed',
-                'fontSize': '24',
+                'fontSize': fontSize,
                 'fontWeight': 'bold',
                 'marginLeft': '35px',
                 'marginTop': '35px',
             }
         )
 
-def SectionCenterHTML(children):
+def SectionCenterHTML(children,color='#000000',fontSize='24'):
     return html.H1(
             children= children,
             style={
                 'textAlign': 'center',
-                'color': colors['text'],
+                'color': color,
                 'fontFamily': 'Roboto Condensed',
-                'fontSize': '24',
+                'fontSize': fontSize,
                 'fontWeight': 'bold',
                 'marginTop': '35px',
             }
         )
 
-def SubsectionHTML(children):
+def SubsectionHTML(children,color='#000000',fontSize='20'):
 	return html.H1(
             children= children,
             style={
                 'textAlign': 'left',
-                'color': colors['text'],
+                'color': color,
                 'fontFamily': 'Roboto Condensed',
-                'fontSize': '20',
+                'fontSize': fontSize,
                 'fontWeight': 'bold',
                 'marginLeft': '35px',
                 'marginTop': '15px',
             }
         )
 
-def SubsectionCenterHTML(children):
+def SubsectionCenterHTML(children,color='#000000',fontSize='20'):
     return html.H1(
             children= children,
             style={
                 'textAlign': 'center',
-                'color': colors['text'],
+                'color': color,
                 'fontFamily': 'Roboto Condensed',
-                'fontSize': '20',
+                'fontSize': fontSize,
                 'fontWeight': 'bold',
                 'marginTop': '15px',
             }
         )
 
-def ParagraphHTML(children):
+def ParagraphHTML(children,color='#000000',fontSize='18'):
 	return html.P(
             children= children, 
             style={
                 'textAlign': 'justify',
-                'color': colors['text'],
+                'color': color,
                 'fontFamily': 'Roboto Condensed',
-                'fontSize': '18',
+                'fontSize': fontSize,
                 'fontWeight': 'normal',
                 'margin': '35px',
             }

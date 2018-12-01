@@ -19,7 +19,7 @@ def DroplistHTML(id_,options,value):
                 style = {
                     'width': '80%',
                     'textAlign': 'left',
-                    'color': colors['text'],
+                    'color': '#000000',
                     'fontFamily': 'Roboto Condensed',
                     'fontSize': '18',
                     'fontWeight': 'normal',
