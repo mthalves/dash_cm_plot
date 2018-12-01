@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
+# System and Standard Libraries
 import base64
 import datetime
 import io
 import re
 from copy import deepcopy
 
+# Dash Python - HTML Interface Libraries
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output, State, Event
-
 import pandas as pd
 
-from utils import *
-
+# Dash Python - My HTML Interface
 from title import *
 from fileselect import *
 from analysisselect import *
@@ -27,7 +27,9 @@ from droplist import *
 from button import *
 from image import *
 
+# Protocols, Plots and Utils
 import Novonix_Protocol
+from utils import *
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
@@ -122,16 +124,15 @@ def dropdown_callback(value,radio):
         return Select_Analysis_Radio(False,'A')
 
 def regex_format(text):
-    formated = list()
+    formated = ''
     for c in text:
-        if c == ' ' and len(formated) > 0 and formated[-1].isdigit():
-            formated.append(c)
-        elif c == '-' and len(formated) > 0 and formated[-1].isdigit():
-            formated.append(c)
+        if c == '-' and len(formated) > 0 and formated[-1].isdigit():
+            formated += c
         elif c == ',' and len(formated) > 0 and formated[-1].isdigit():
-            formated.append(c)
+            formated += c
         elif re.match('\d',c) != None:
-            formated.append(c)
+            formated += c
+    print formated
     return formated
 
 @app.callback(Output(component_id='cycles-select',component_property='children'),
@@ -139,20 +140,24 @@ def regex_format(text):
                 [],
                 [])
 def cycles_callback(input_):
+    print 'trigged', input_
+    formated = regex_format(deepcopy(input_))
+    print '>>',formated
+
     if re.match("^\s*$",input_) != None:
         return 'Selected Cycles = Empty'
-    if re.match("^([\d]+\s*[\s\,\-]{0,1}\s*)+$",input_) != None:
-        return 'Selected Cycles = ',input_
+    if re.match("^([\d]+\s*[\,\-]{0,1}\s*)+$",input_) != None:
+        return 'Selected Cycles = ',formated
     else:
         return 'Selected Cycles = Invalid Format'
 
 
-def plot_callback(dropdown,title,xlabel,ylabel):
+def plot_callback(dropdown,title,xlabel,ylabel,cycles):
     global file
     if dropdown == 'CE':
         return Novonix_Protocol.CoulombicEfficiency(file,title,xlabel,ylabel)
     elif dropdown == 'DVA':
-        return Novonix_Protocol.DVA(file,[5,10],title,xlabel,ylabel)
+        return Novonix_Protocol.DVA(file,title,xlabel,ylabel,cycles)
 
 @app.callback(   
     Output(component_id='plot_click', component_property='children'),
@@ -160,14 +165,15 @@ def plot_callback(dropdown,title,xlabel,ylabel):
      Input('analysis-dropdown','value'),
      Input('title-input','value'),
      Input('xlabel-input','value'),
-     Input('ylabel-input','value')])
-def refresh_callback(n_clicks,value,title,xlabel,ylabel):
+     Input('ylabel-input','value'),
+     Input('cycles-input','value')])
+def refresh_callback(n_clicks,value,title,xlabel,ylabel,cycles):
     global last_n_clicks
     if n_clicks == 0:
         return None
     elif last_n_clicks != n_clicks:
         last_n_clicks = n_clicks
-        return plot_callback(value,title,xlabel,ylabel)
+        return plot_callback(value,title,xlabel,ylabel,cycles)
 
 if __name__ == '__main__':
     app.run_server(debug=True)
