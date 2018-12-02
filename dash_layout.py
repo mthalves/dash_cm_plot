@@ -115,9 +115,7 @@ def regex_format(text):
                 [],
                 [])
 def cycles_callback(input_):
-    print 'trigged', input_
     formated = regex_format(deepcopy(input_))
-    print '>>',formated
 
     if re.match("^\s*$",input_) != None:
         return 'Selected Cycles = Empty'
@@ -134,6 +132,55 @@ def plot_callback(dropdown,title,xlabel,ylabel,cycles):
     elif dropdown == 'DVA':
         return Novonix_Protocol.DVA(file,title,xlabel,ylabel,cycles)
 
+def cycletolist(formated):
+    # 0. Variables
+    i = 0
+    number = ''
+    cycles = []
+
+    while i < len(formated):
+        # 1. Reading the number
+        while i < len(formated) \
+        and re.match('\d',formated[i]) != None:
+            number += formated[i]
+            i += 1
+
+        # 2. Appending
+        if len(number) != 0:
+            number = int(number)
+            cycles.append(number)
+            number = ''
+
+        if i == len(formated):
+            break
+
+        # 3. Checking format
+        # a. single
+        if formated[i] == ',':
+            i += 1
+        # b. range
+        elif formated[i] == '-':
+            i += 1
+            number = cycles[-1]
+
+            range_number = ''
+            while i < len(formated)\
+            and re.match('\d',formated[i]) != None:
+                range_number += formated[i]
+                i += 1
+            range_number = int(range_number)
+
+            if range_number < number:
+                for n in range(range_number,number):
+                    cycles.append(n)
+            else:
+                for n in range(number+1,range_number+1):
+                    cycles.append(n)
+            number = ''
+
+    print 'finish',cycles
+    return cycles
+
 @app.callback(   
     Output(component_id='plot_click', component_property='children'),
     [Input('plot_button','n_clicks'),
@@ -148,7 +195,14 @@ def refresh_callback(n_clicks,value,title,xlabel,ylabel,cycles):
         return None
     elif last_n_clicks != n_clicks:
         last_n_clicks = n_clicks
-        return plot_callback(value,title,xlabel,ylabel,cycles)
+        formated = regex_format(deepcopy(cycles))
+        if len(formated) > 0:
+            cycle_list = cycletolist(formated)
+            cycle_list.sort()
+        else:
+            cycle_list = []
+        print 'cycles: ',cycle_list
+        return plot_callback(value,title,xlabel,ylabel,cycle_list)
 
 if __name__ == '__main__':
     app.run_server(debug=True)
