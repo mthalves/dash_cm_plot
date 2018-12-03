@@ -180,33 +180,38 @@ def DVA(file,title,xlabel,ylabel,cycles):
 				X.append(Q[1:len(Q)])
 				Y.append(dVdQ)
 				
-			V, Q, dVdQ = [], [], []
+		V, Q, dVdQ = [], [], []
 
-	return html.Div([
-				    dcc.Graph(
-				        id='graph',
-				        figure={
-				            'data': [
-				                {
-				                	'x': X,
-				                    'y': Y,
-				                    'mode': 'lines+markers',
-				                    'marker': {'size': 12},
-				                }
-				            ],
-				            'layout':{
-				        		'title':title,
-			            		'xaxis': {
-			            			'title':plotx,
-			            			'size':18,
-			            			'family':'Roboto Condensed Bold',
-			            		},
-			            		'yaxis': {
-			            			'title':ploty,
-			            			'size':18,
-			            			'family':'Roboto Condensed Bold',
-			            		}
-			            	}
-				        }
-				    )
-			    ])
+	if len(X) > 0:
+		return html.Div([
+					    dcc.Graph(
+					        id='graph',
+					        figure={
+					            'data': [
+					                {
+					                	'x': X[i],
+					                    'y': Y[i],
+					                    'mode': 'lines+markers',
+					                    'marker': {'size': 12},
+					                    'name': 'Cycle {}'.format(cycles[i]),
+					                }
+					                for i in range(len(X))
+					            ],
+					            'layout':{
+					        		'title':title,
+				            		'xaxis': {
+				            			'title':plotx,
+				            			'size':18,
+				            			'family':'Roboto Condensed Bold',
+				            		},
+				            		'yaxis': {
+				            			'title':ploty,
+				            			'size':18,
+				            			'family':'Roboto Condensed Bold',
+				            		}
+				            	}
+					        }
+					    )
+				    ])
+	else:
+		return None

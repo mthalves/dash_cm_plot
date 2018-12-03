@@ -128,8 +128,10 @@ def cycles_callback(input_):
 def plot_callback(dropdown,title,xlabel,ylabel,cycles):
     global file
     if dropdown == 'CE':
+        print 'CE'
         return Novonix_Protocol.CoulombicEfficiency(file,title,xlabel,ylabel)
     elif dropdown == 'DVA':
+        print 'DVA'
         return Novonix_Protocol.DVA(file,title,xlabel,ylabel,cycles)
 
 def cycletolist(formated):
@@ -178,7 +180,6 @@ def cycletolist(formated):
                     cycles.append(n)
             number = ''
 
-    print 'finish',cycles
     return cycles
 
 @app.callback(   
@@ -191,7 +192,7 @@ def cycletolist(formated):
      Input('cycles-input','value')])
 def refresh_callback(n_clicks,value,title,xlabel,ylabel,cycles):
     global last_n_clicks
-    if n_clicks == 0:
+    if n_clicks == last_n_clicks:
         return None
     elif last_n_clicks != n_clicks:
         last_n_clicks = n_clicks
